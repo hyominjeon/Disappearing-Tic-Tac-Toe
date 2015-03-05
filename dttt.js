@@ -1,8 +1,8 @@
 var color;
 var WHITE = -1;
 var NOT_CHOSEN = -2;
-var player0;
-var player1;
+var playerRed;
+var playerBlue;
 var WINNINGCOMBO = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 var turn = 0;
 
@@ -12,14 +12,14 @@ window.onload = function(){
 		color[i] = WHITE;
 	}
 
-	player0 = new Array();
+	playerRed = new Array();
 	for (var i = 0; i < 3; ++i) {
-		player0[i] = NOT_CHOSEN;
+		playerRed[i] = NOT_CHOSEN;
 	}
 
-	player1 = new Array();
+	playerBlue = new Array();
 	for (var i = 0; i < 3; ++i) {
-		player1[i] = NOT_CHOSEN;
+		playerBlue[i] = NOT_CHOSEN;
 	}
 }
 
@@ -32,7 +32,7 @@ function canvasClicked(canvasNumber) {
 			var turn0 = turn / 2;
 
 			// one disappears
-			disappearingCNum = player0[turn0 % 3];
+			disappearingCNum = playerRed[turn0 % 3];
 			if (disappearingCNum != NOT_CHOSEN) {
 				disappearingCanvas = document.getElementById("canvas" + disappearingCNum);
 				disappearingCanvas.style.background = "white";
@@ -41,13 +41,13 @@ function canvasClicked(canvasNumber) {
 
 			// one appears
 			color[canvasNumber] = 0;
-			player0[turn0 % 3] = canvasNumber;
+			playerRed[turn0 % 3] = canvasNumber;
 			clickedCanvas.style.background = "red";
 		} else {
 			var turn1 = (turn - 1) / 2;
 
 			// one disappears
-			disappearingCNum = player1[turn1 % 3];
+			disappearingCNum = playerBlue[turn1 % 3];
 			if (disappearingCNum != NOT_CHOSEN) {
 				disappearingCanvas = document.getElementById("canvas" + disappearingCNum);
 				disappearingCanvas.style.background = "white";
@@ -56,7 +56,7 @@ function canvasClicked(canvasNumber) {
 			
 			// one appears
 			color[canvasNumber] = 1;
-			player1[turn1 % 3] = canvasNumber;
+			playerBlue[turn1 % 3] = canvasNumber;
 			clickedCanvas.style.background = "blue";
 		}
 		++turn;
